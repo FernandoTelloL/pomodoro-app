@@ -6,6 +6,8 @@ const template = d.getElementById('template').content;
 const fragment = d.createDocumentFragment();
 const tareaActual = d.getElementById('tarea-actual');
 const tareaTexto = d.getElementById('tarea-texto');
+const display = d.getElementById('display');
+
 let tareas = {};
 let tareaSeleccionada;
 const bloqueTimeWork = d.getElementById('bloque-time-work');
@@ -100,6 +102,7 @@ const btnAccion = e => {
   if (e.target.classList.contains('fa-check-circle')) {
     // console.log(e.target.dataset.id);
     tareas[e.target.dataset.id].estado = true;
+    display.style.backgroundColor = '#d04643';
     tareaSeleccionada = e.target.parentNode.parentNode.textContent.trim();
     tareaActual.innerHTML = tareaSeleccionada;
     pintarTareas();
@@ -126,7 +129,7 @@ let horas = 0,
   minutos = 1,
   segundos = 0,
   segundosDescanso = 0,
-  minutosDescanso = 2;
+  minutosDescanso = 1;
 let setIntervalSegundos;
 let setIntervalSegundosDescanso;
 
@@ -185,6 +188,7 @@ function cargarMinutos(segundos) {
 /* *********** tiempo de descanso ******* */
 
 function cargarSegundoDescanso() {
+  tareaActual.innerHTML = 'Momento de Descansar';
   let txtSegundosDescanso;
 
   if (segundosDescanso < 0) {
@@ -206,7 +210,10 @@ function cargarSegundoDescanso() {
 //Definimos y ejecutamos los minutos de descando
 function cargarMinutosDescanso(segundosDescanso) {
   let txtMinutosDescanso;
-  tareaRealizar.innerHTML = '';
+  // tareaRealizar.innerHTML = '';
+  bloqueTimeWork.classList.add('d-none');
+  bloqueTimeRest.classList.remove('d-none');
+  display.style.backgroundColor = '#56bd56';
   console.log('inicio minutos descanso');
 
   if (segundosDescanso == -1 && minutosDescanso != 0) {

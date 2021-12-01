@@ -40,6 +40,8 @@ body {
   padding: 1rem;
   color: white;
   height: 17rem;
+  border-radius: 10px;
+  margin-bottom: 3rem;
 }
 
 .bloque-time-work,
