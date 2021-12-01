@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ******* Inicio Header ************** */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: thin solid #d04643;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  height: 3rem;
+}
+
+.header__login,
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__login-icon,
+.header__logo-icon {
+  margin-right: 0.8rem;
+  color: #d04643;
+}
+/* ******* Fin Header ************** */
+
+.btn-agregar-tarea {
+  width: 100%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
