@@ -4,13 +4,20 @@ const input = d.getElementById('input');
 const listaTarea = d.getElementById('lista-tareas');
 const template = d.getElementById('template').content;
 const fragment = d.createDocumentFragment();
+const tareaActual = d.getElementById('tarea-actual');
+const tareaTexto = d.getElementById('tarea-texto');
 let tareas = {};
+let tareaSeleccionada;
 
 d.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('tareas')) {
     tareas = JSON.parse(localStorage.getItem('tareas'));
   }
   pintarTareas();
+
+  /* ***** inicio timer ****** */
+  iniciarContador('#btn-start');
+  /* ***** fin timer ****** */
 });
 
 listaTarea.addEventListener('click', e => {
@@ -57,6 +64,7 @@ const pintarTareas = () => {
   }
 
   listaTarea.innerHTML = '';
+
   // esta funcion recorre un objeto
   Object.values(tareas).forEach(tarea => {
     //para usar template primero se hace el clon del template
@@ -90,18 +98,137 @@ const btnAccion = e => {
   if (e.target.classList.contains('fa-check-circle')) {
     // console.log(e.target.dataset.id);
     tareas[e.target.dataset.id].estado = true;
+    tareaSeleccionada = e.target.parentNode.parentNode.textContent.trim();
+    tareaActual.innerHTML = tareaSeleccionada;
     pintarTareas();
   }
 
   if (e.target.classList.contains('fa-minus-circle')) {
     delete tareas[e.target.dataset.id];
+    tareaActual.innerHTML = '';
     pintarTareas();
   }
 
   if (e.target.classList.contains('fa-undo-alt')) {
     tareas[e.target.dataset.id].estado = false;
+    tareaActual.innerHTML = '';
     pintarTareas();
   }
 
   e.stopPropagation();
 };
+
+/* ************* inicio configuracion timer ******* */
+
+let horas = 0,
+  minutos = 1,
+  segundos = 0,
+  segundosDescanso = 0,
+  minutosDescanso = 2;
+let setIntervalSegundos;
+let setIntervalSegundosDescanso;
+
+//funcion para inicial contador pomodoro con boton
+const iniciarContador = idBtn => {
+  d.addEventListener('click', e => {
+    if (e.target.matches(idBtn)) {
+      setIntervalSegundos = setInterval(cargarSegundo, 1000);
+    }
+  });
+};
+
+//Definimos y ejecutamos los segundos
+function cargarSegundo() {
+  let txtSegundos;
+
+  if (segundos < 0) {
+    segundos = 59;
+  }
+
+  //Mostrar segundos en pantalla
+  if (segundos < 10) {
+    txtSegundos = `0${segundos}`;
+  } else {
+    txtSegundos = segundos;
+  }
+  document.getElementById('segundos').innerHTML = txtSegundos;
+  segundos--;
+
+  cargarMinutos(segundos);
+}
+
+//Definimos y ejecutamos los minutos
+function cargarMinutos(segundos) {
+  let txtMinutos;
+
+  if (segundos == -1 && minutos != 0) {
+    let timeOutSegundos = setTimeout(() => {
+      minutos--;
+    }, 500);
+  } else if (segundos == -1 && minutos == 0) {
+    cargarSegundoDescanso();
+    clearInterval(setIntervalSegundos);
+    setIntervalSegundosDescanso = setInterval(cargarSegundoDescanso, 1000);
+  }
+
+  //Mostrar minutos en pantalla
+  if (minutos < 10) {
+    txtMinutos = `0${minutos}`;
+  } else {
+    txtMinutos = minutos;
+  }
+
+  document.getElementById('minutos').innerHTML = txtMinutos;
+  // cargarHoras(segundos, minutos);
+}
+/* *********** tiempo de descanso ******* */
+
+function cargarSegundoDescanso() {
+  let txtSegundosDescanso;
+
+  if (segundosDescanso < 0) {
+    segundosDescanso = 59;
+  }
+
+  //Mostrar segundos en pantalla
+  if (segundosDescanso < 10) {
+    txtSegundosDescanso = `0${segundosDescanso}`;
+  } else {
+    txtSegundosDescanso = segundosDescanso;
+  }
+  document.getElementById('segundos-descanso').innerHTML = txtSegundosDescanso;
+  segundosDescanso--;
+
+  cargarMinutosDescanso(segundosDescanso);
+}
+
+//Definimos y ejecutamos los minutos de descando
+function cargarMinutosDescanso(segundosDescanso) {
+  let txtMinutosDescanso;
+  tareaRealizar.innerHTML = '';
+  console.log('inicio minutos descanso');
+
+  if (segundosDescanso == -1 && minutosDescanso != 0) {
+    let timeOutSegundosDescanso = setTimeout(() => {
+      minutosDescanso--;
+    }, 500);
+  } else if (segundosDescanso == -1 && minutosDescanso == 0) {
+    // setTimeout(() => {
+    // minutos = 59;
+    // }, 500);
+    clearInterval(setIntervalSegundosDescanso);
+    console.log('se acabo el tiempo');
+  }
+
+  //Mostrar minutos en pantalla
+  if (minutosDescanso < 10) {
+    txtMinutosDescanso = `0${minutosDescanso}`;
+  } else {
+    txtMinutosDescanso = minutosDescanso;
+  }
+
+  document.getElementById('minutos-descanso').innerHTML = txtMinutosDescanso;
+  // cargarHoras(segundos, minutos);
+}
+
+/* ************* fin configuracion timer ******* */

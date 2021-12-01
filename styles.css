@@ -1,7 +1,13 @@
+:root {
+  --font-timer: 'Sacramento', cursive;
+  --font-body: 'Roboto', sans-serif;
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--font-body);
 }
 
 /* ******* Inicio Header ************** */
@@ -28,6 +34,51 @@ body {
   color: #d04643;
 }
 /* ******* Fin Header ************** */
+/* ******* inicio timer ******** */
+.display {
+  background: #d04643;
+  padding: 1rem;
+  color: white;
+  height: 17rem;
+}
+
+.display-time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 6rem;
+  font-family: var(--font-timer);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.btn-start {
+  margin-right: 1rem;
+  width: 15rem;
+}
+
+.btn-stop {
+  width: 15rem;
+}
+
+.puntos {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.tarea-actual {
+  margin: 0;
+  text-align: center;
+}
+/* ******* fin timer ******** */
+
+.main-title {
+  /* font-family: var(--font-timer); */
+}
 
 .btn-agregar-tarea {
   width: 100%;
