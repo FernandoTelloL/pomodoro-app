@@ -101,6 +101,11 @@ const btnAccion = e => {
   // console.log(e.target.classList.contains('fa-check-circle'));
   if (e.target.classList.contains('fa-check-circle')) {
     // console.log(e.target.dataset.id);
+
+    /* *********************** */
+    bloqueTimeWork.classList.remove('d-none');
+    bloqueTimeRest.classList.add('d-none');
+    /* *********************** */
     tareas[e.target.dataset.id].estado = true;
     display.style.backgroundColor = '#d04643';
     tareaSeleccionada = e.target.parentNode.parentNode.textContent.trim();
@@ -136,6 +141,8 @@ let setIntervalSegundosDescanso;
 //funcion para inicial contador pomodoro con boton
 const iniciarContador = idBtn => {
   d.addEventListener('click', e => {
+    // minutos = 1;
+    // segundos = 0;
     if (e.target.matches(idBtn)) {
       setIntervalSegundos = setInterval(cargarSegundo, 1000);
     }
@@ -236,7 +243,6 @@ function cargarMinutosDescanso(segundosDescanso) {
   }
 
   document.getElementById('minutos-descanso').innerHTML = txtMinutosDescanso;
-  // cargarHoras(segundos, minutos);
 }
 
 /* ************* fin configuracion timer ******* */
