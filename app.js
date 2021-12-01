@@ -8,6 +8,8 @@ const tareaActual = d.getElementById('tarea-actual');
 const tareaTexto = d.getElementById('tarea-texto');
 let tareas = {};
 let tareaSeleccionada;
+const bloqueTimeWork = d.getElementById('bloque-time-work');
+const bloqueTimeRest = d.getElementById('bloque-time-rest');
 
 d.addEventListener('DOMContentLoaded', () => {
   if (localStorage.getItem('tareas')) {
@@ -179,7 +181,6 @@ function cargarMinutos(segundos) {
   }
 
   document.getElementById('minutos').innerHTML = txtMinutos;
-  // cargarHoras(segundos, minutos);
 }
 /* *********** tiempo de descanso ******* */
 
