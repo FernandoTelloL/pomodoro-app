@@ -13,48 +13,6 @@ let tareaSeleccionada;
 const bloqueTimeWork = d.getElementById('bloque-time-work');
 const bloqueTimeRest = d.getElementById('bloque-time-rest');
 
-d.addEventListener('DOMContentLoaded', () => {
-  if (localStorage.getItem('tareas')) {
-    tareas = JSON.parse(localStorage.getItem('tareas'));
-  }
-  pintarTareas();
-
-  /* ***** inicio timer ****** */
-  iniciarContador('#btn-start');
-  /* ***** fin timer ****** */
-});
-
-listaTarea.addEventListener('click', e => {
-  btnAccion(e);
-});
-
-formulario.addEventListener('submit', e => {
-  e.preventDefault();
-  setTarea(e);
-});
-
-const setTarea = e => {
-  if (input.value.trim() === '') {
-    console.log('esta vacio');
-    return;
-  }
-
-  const tarea = {
-    id: Date.now(),
-    texto: input.value,
-    estado: false,
-  };
-
-  tareas[tarea.id] = tarea;
-
-  // console.log(tareas);
-
-  formulario.reset();
-  input.focus();
-
-  pintarTareas();
-};
-
 const pintarTareas = () => {
   localStorage.setItem('tareas', JSON.stringify(tareas));
 
@@ -97,6 +55,186 @@ const pintarTareas = () => {
   listaTarea.appendChild(fragment);
 };
 
+//funcion para inicial contador pomodoro con boton
+const iniciarContador = idBtn => {
+  d.addEventListener('click', e => {
+    // minutos = 1;
+    // segundos = 0;
+    if (e.target.matches(idBtn)) {
+      setIntervalSegundos = setInterval(cargarSegundo, 1000);
+    }
+  });
+};
+
+d.addEventListener('DOMContentLoaded', () => {
+  if (localStorage.getItem('tareas')) {
+    tareas = JSON.parse(localStorage.getItem('tareas'));
+  }
+  pintarTareas();
+
+  /* ***** inicio timer ****** */
+  iniciarContador('#btn-start');
+  /* ***** fin timer ****** */
+});
+
+/* inicio reproducir canciones */
+// Carga un sonido a través de su fuente y lo inyecta de manera oculta
+const cargarSonido = function (fuente) {
+  const sonido = document.createElement('audio');
+  sonido.src = fuente;
+  sonido.setAttribute('preload', 'auto');
+  sonido.setAttribute('controls', 'none');
+  sonido.setAttribute('loop', 'true');
+  sonido.style.display = 'none'; // <-- oculto
+  document.body.appendChild(sonido);
+  return sonido;
+};
+const $btnPlaySong1 = document.querySelector('#btnPlay-song1'),
+  $btnPlaySong2 = document.querySelector('#btnPlay-song2'),
+  $btnPlaySong3 = document.querySelector('#btnPlay-song3'),
+  $btnPlaySong4 = document.querySelector('#btnPlay-song4'),
+  $botonPausar = document.querySelector('#btn-stop'),
+  // El sonido que podemos reproducir o pausar
+  sonido1 = cargarSonido(
+    'https://mus7.about-in.tk/skm/84a96513-ed00-4527-92e2-0c97c82d2d98.mp3',
+  ),
+  sonido2 = cargarSonido(
+    'https://musicarelajante.me/wp-content/uploads/2016/11/Musica-para-estudiar-concentrarse-y-pensar.mp3',
+  ),
+  sonido3 = cargarSonido(
+    'https://musicarelajante.me/wp-content/uploads/2017/05/Musica-relajante-para-estudiar-relajacion.mp3',
+  ),
+  sonido4 = cargarSonido(
+    'https://mus10.about-in.tk/skm/30248394-1a65-4b5a-b21c-3d91b3a10169.mp3',
+  );
+
+$btnPlaySong1.addEventListener('click', e => {
+  sonido2.pause();
+  sonido3.pause();
+  sonido4.pause();
+  sonido1.play();
+  $btnPlaySong2.classList.remove('animate__flip');
+  $btnPlaySong2.classList.remove('animate__infinite');
+  $btnPlaySong2.classList.remove('animate__zoomInUp');
+  $btnPlaySong3.classList.remove('animate__flip');
+  $btnPlaySong3.classList.remove('animate__infinite');
+  $btnPlaySong3.classList.remove('animate__zoomInDown');
+  $btnPlaySong4.classList.remove('animate__flip');
+  $btnPlaySong4.classList.remove('animate__infinite');
+  $btnPlaySong4.classList.remove('animate__zoomInUp');
+  e.target.classList.add('animate__flip');
+  e.target.classList.add('animate__infinite');
+});
+
+$btnPlaySong2.addEventListener('click', e => {
+  sonido1.pause();
+  sonido3.pause();
+  sonido4.pause();
+  sonido2.play();
+  $btnPlaySong1.classList.remove('animate__flip');
+  $btnPlaySong1.classList.remove('animate__infinite');
+  $btnPlaySong1.classList.remove('animate__zoomInDown');
+  $btnPlaySong3.classList.remove('animate__flip');
+  $btnPlaySong3.classList.remove('animate__infinite');
+  $btnPlaySong3.classList.remove('animate__zoomInDown');
+  $btnPlaySong4.classList.remove('animate__flip');
+  $btnPlaySong4.classList.remove('animate__infinite');
+  $btnPlaySong4.classList.remove('animate__zoomInUp');
+  e.target.classList.add('animate__flip');
+  e.target.classList.add('animate__infinite');
+});
+
+$btnPlaySong3.addEventListener('click', e => {
+  sonido1.pause();
+  sonido2.pause();
+  sonido4.pause();
+  sonido3.play();
+  $btnPlaySong1.classList.remove('animate__flip');
+  $btnPlaySong1.classList.remove('animate__infinite');
+  $btnPlaySong1.classList.remove('animate__zoomInDown');
+  $btnPlaySong2.classList.remove('animate__flip');
+  $btnPlaySong2.classList.remove('animate__infinite');
+  $btnPlaySong2.classList.remove('animate__zoomInUp');
+  $btnPlaySong4.classList.remove('animate__flip');
+  $btnPlaySong4.classList.remove('animate__infinite');
+  $btnPlaySong4.classList.remove('animate__zoomInUp');
+  e.target.classList.add('animate__flip');
+  e.target.classList.add('animate__infinite');
+});
+
+$btnPlaySong4.addEventListener('click', e => {
+  sonido1.pause();
+  sonido2.pause();
+  sonido3.pause();
+  sonido4.play();
+  $btnPlaySong1.classList.remove('animate__flip');
+  $btnPlaySong1.classList.remove('animate__infinite');
+  $btnPlaySong1.classList.remove('animate__zoomInDown');
+  $btnPlaySong2.classList.remove('animate__flip');
+  $btnPlaySong2.classList.remove('animate__infinite');
+  $btnPlaySong2.classList.remove('animate__zoomInUp');
+  $btnPlaySong3.classList.remove('animate__flip');
+  $btnPlaySong3.classList.remove('animate__infinite');
+  $btnPlaySong3.classList.remove('animate__zoomInDown');
+  e.target.classList.add('animate__flip');
+  e.target.classList.add('animate__infinite');
+});
+
+$botonPausar.addEventListener('click', e => {
+  sonido1.currentTime = 0;
+  sonido2.currentTime = 0;
+  sonido3.currentTime = 0;
+  sonido4.currentTime = 0;
+  sonido1.pause();
+  sonido2.pause();
+  sonido3.pause();
+  sonido4.pause();
+  $btnPlaySong1.classList.remove('animate__flip');
+  $btnPlaySong1.classList.remove('animate__infinite');
+  $btnPlaySong1.classList.remove('animate__zoomInDown');
+  $btnPlaySong2.classList.remove('animate__flip');
+  $btnPlaySong2.classList.remove('animate__infinite');
+  $btnPlaySong2.classList.remove('animate__zoomInUp');
+  $btnPlaySong3.classList.remove('animate__flip');
+  $btnPlaySong3.classList.remove('animate__infinite');
+  $btnPlaySong3.classList.remove('animate__zoomInDown');
+  $btnPlaySong4.classList.remove('animate__flip');
+  $btnPlaySong4.classList.remove('animate__infinite');
+  $btnPlaySong4.classList.remove('animate__zoomInUp');
+});
+/* fin reproducir canciones */
+
+listaTarea.addEventListener('click', e => {
+  btnAccion(e);
+});
+
+formulario.addEventListener('submit', e => {
+  e.preventDefault();
+  setTarea(e);
+});
+
+const setTarea = e => {
+  if (input.value.trim() === '') {
+    console.log('esta vacio');
+    return;
+  }
+
+  const tarea = {
+    id: Date.now(),
+    texto: input.value,
+    estado: false,
+  };
+
+  tareas[tarea.id] = tarea;
+
+  // console.log(tareas);
+
+  formulario.reset();
+  input.focus();
+
+  pintarTareas();
+};
+
 const btnAccion = e => {
   // console.log(e.target.classList.contains('fa-check-circle'));
   if (e.target.classList.contains('fa-check-circle')) {
@@ -137,17 +275,6 @@ let horas = 0,
   minutosDescanso = 1;
 let setIntervalSegundos;
 let setIntervalSegundosDescanso;
-
-//funcion para inicial contador pomodoro con boton
-const iniciarContador = idBtn => {
-  d.addEventListener('click', e => {
-    // minutos = 1;
-    // segundos = 0;
-    if (e.target.matches(idBtn)) {
-      setIntervalSegundos = setInterval(cargarSegundo, 1000);
-    }
-  });
-};
 
 //Definimos y ejecutamos los segundos
 function cargarSegundo() {

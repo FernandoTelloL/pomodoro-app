@@ -65,7 +65,9 @@ body {
 }
 
 .btn-stop {
-  width: 15rem;
+  position: absolute;
+  top: 50%;
+  font-size: 0.7rem;
 }
 
 .puntos {
@@ -79,9 +81,64 @@ body {
 }
 /* ******* fin timer ******** */
 
-.main-title {
-  /* font-family: var(--font-timer); */
+/* inicio botones canciones */
+.podomoro-timer {
+  position: relative;
 }
+
+.btn-song1,
+.btn-song2,
+.btn-song3,
+.btn-song4 {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-image: url('images/piero.jpg');
+  background-position: top; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover;
+  border: thin solid rgb(121, 120, 120);
+}
+
+.btn-song2 {
+  top: inherit;
+  bottom: -20px;
+  background-image: url('https://conceptodefinicion.de/wp-content/uploads/2020/11/naturaleza.jpg');
+}
+
+.btn-song3 {
+  left: inherit;
+  right: -20px;
+  background-image: url('https://casaydiseno.com/wp-content/uploads/2015/04/caseta-madera-japonesa-jardin.jpg');
+}
+
+.btn-song4 {
+  top: inherit;
+  left: inherit;
+  right: -30px;
+  bottom: -20px;
+  background-image: url('https://myinstagirls.com/wp-content/uploads/2019/01/kendra-lust_1058041-580x350.jpg');
+}
+
+.btn-song1:hover,
+.btn-song2:hover,
+.btn-song3:hover,
+.btn-song4:hover {
+  box-shadow: 0px 0px 5px 5px rgba(58, 32, 32, 0.5);
+}
+
+.btn-song1:focus,
+.btn-song2:focus,
+.btn-song3:focus,
+.btn-song4:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* fin botones canciones */
 
 .btn-agregar-tarea {
   width: 100%;

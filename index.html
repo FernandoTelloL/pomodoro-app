@@ -23,6 +23,10 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <link rel="stylesheet" href="./reset.css" />
     <link rel="stylesheet" href="./styles.css" />
     <title>App-Pomodoro 😉</title>
@@ -47,6 +51,12 @@
 
       <div class="podomoro-timer">
         <div class="display" id="display">
+          <button
+            class="btn-stop btn btn-block btn-outline-light btn-sm"
+            id="btn-stop"
+          >
+            Detener Música
+          </button>
           <div class="display-time">
             <div class="bloque-time-work" id="bloque-time-work">
               <div class="minutos" id="minutos">25</div>
@@ -73,6 +83,46 @@
             <div class="tareaRealizar" id="tareaRealizar"></div>
           </div>
         </div>
+
+        <!-- inicio botones musica -->
+        <audio id="song1" loop></audio>
+
+        <button
+          class="
+            btn-song1
+            animate__animated animate__zoomInDown animate__delay-2s
+          "
+          id="btnPlay-song1"
+        ></button>
+        <!-- **** fin boton 1 -->
+        <audio id="song2"></audio>
+        <button
+          class="
+            btn-song2
+            animate__animated animate__zoomInUp animate__delay-3s
+          "
+          id="btnPlay-song2"
+        ></button>
+        <!-- **** fin boton 2 -->
+        <audio id="song3"></audio>
+        <button
+          class="
+            btn-song3
+            animate__animated animate__zoomInDown animate__delay-4s
+          "
+          id="btnPlay-song3"
+        ></button>
+        <!-- **** fin boton 3 -->
+        <audio id="song4"></audio>
+        <button
+          class="
+            btn-song4
+            animate__animated animate__zoomInUp animate__delay-5s
+          "
+          id="btnPlay-song4"
+        ></button>
+        <!-- **** fin boton 4 -->
+        <!-- fin botones musica -->
       </div>
 
       <form id="formulario">
